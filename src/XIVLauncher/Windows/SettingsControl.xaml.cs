@@ -154,7 +154,7 @@ namespace XIVLauncher.Windows
 
         private void GitHubButton_OnClick(object sender, RoutedEventArgs e)
         {
-            PlatformHelpers.OpenBrowser("https://github.com/goaaats/FFXIVQuickLauncher");
+            PlatformHelpers.OpenBrowser(App.REPO_URL);
         }
 
         private void BackupToolButton_OnClick(object sender, RoutedEventArgs e)

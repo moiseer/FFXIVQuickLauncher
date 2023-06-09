@@ -102,7 +102,7 @@ namespace XIVLauncher.Support
                 EncryptArguments = App.Settings.EncryptArguments.GetValueOrDefault(true),
                 LauncherVersion = AppUtil.GetAssemblyVersion(),
                 LauncherHash = AppUtil.GetGitHash(),
-                Official = AppUtil.GetBuildOrigin() == "goatcorp/FFXIVQuickLauncher",
+                Official = AppUtil.GetBuildOrigin() == App.BUILD_ORIGIN,
                 DpiAwareness = App.Settings.DpiAwareness.GetValueOrDefault(),
                 Platform = PlatformHelpers.GetPlatform(),
 
