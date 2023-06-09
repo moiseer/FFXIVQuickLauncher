@@ -1,8 +1,8 @@
-﻿This is a maintenance release.
+﻿Это релиз с обновлением русской локализации.
 
-This release is intended to test the update system. Please use a regular release instead.
+Этот выпуск предназначен для тестирования системы обновления.
 
-**:warning: Attention!**
-If you receive errors during the installation or if the launcher doesn't work correctly, make sure to check your antivirus first and disable it for XIVLauncher. Many commercial antivirus programs detect XIVLauncher as a false positive. Please also see this FAQ entry with more information: https://goatcorp.github.io/faq/xl_troubleshooting#q-how-do-i-whitelist-xivlauncher-and-dalamud-so-my-antivirus-leaves-them-alone
+**:warning: Внимание!**.
+Если вы получаете ошибки во время установки или если программа запуска работает некорректно, сначала проверьте ваш антивирус и отключите его для XIVLauncher. Многие коммерческие антивирусные программы определяют XIVLauncher как ложное срабатывание. Смотрите также этот раздел FAQ с дополнительной информацией: https://goatcorp.github.io/faq/xl_troubleshooting#q-how-do-i-whitelist-xivlauncher-and-dalamud-so-my-antivirus-leaves-them-alone.
 
-**Please download ``Setup.exe`` from below to install XIVLauncher, if you have not used it before.**
+**Для установки XIVLauncher, если вы не использовали его ранее, загрузите файл ``Setup.exe`` из списка ниже.**.

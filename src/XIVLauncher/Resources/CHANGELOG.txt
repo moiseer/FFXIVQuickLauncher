@@ -6,3 +6,6 @@
     => If you previously encountered issues with this feature, you should try repairing again by right-clicking the login button
 * Fixes an issue wherein the launch conditions for Dalamud would differ between the Linux and Windows versions of XIVLauncher
 * Fixes an issue wherein, if certain essential files for Dalamud were missing, no error message would be shown
+
+(RU) История изменений:
+* Обновлена русская локализация
