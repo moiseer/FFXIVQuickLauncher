@@ -8,7 +8,7 @@
     "description": "AppUtil.TryYellOnGameFilesBeingOpen"
   },
   "UninstallQuestion": {
-    "message": "Sorry to see you go!\nDo you want to delete all of your saved settings, plugins and passwords?",
+    "message": "Жаль, что вы уходите!\nВы хотите удалить все сохраненные настройки, плагины и пароли?",
     "description": "<>c__DisplayClass20_1.<Run>b__2"
   },
   "updatefailureerror": {
@@ -412,7 +412,7 @@
     "description": "MainWindowViewModel.SetupLoc"
   },
   "LoginBoxNoPluginLogin": {
-    "message": "Start w/o any Plugins",
+    "message": "Запустить без плагинов",
     "description": "MainWindowViewModel.SetupLoc"
   },
   "LoginBoxNoThirdLogin": {

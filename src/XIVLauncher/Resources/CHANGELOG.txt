@@ -1,4 +1,6 @@
-* Adds a clipboard button to the OTP window, which will automatically paste in your clipboard contents as an OTP once pressed
-* Fixes an issue wherein required data files for Dalamud may not have been downloaded correctly under certain conditions
-* Removed the plugins tab from XIVLauncher settings due to incompatibilities. We moved all of this functionality into Dalamud.
-    => You can manage plugins from the title screen by right-clicking the login button and choosing "Start w/o any Plugins"
+История изменений:
+* Обновлена русская локализация
+* Добавлена кнопка буфера обмена в окно OTP, которая автоматически вставляет содержимое OTP в буфер обмена после нажатия кнопки.
+* Исправлена проблема, при которой необходимые файлы данных для Dalamud могли быть загружены некорректно при определенных условиях
+* Удалена вкладка плагинов из настроек XIVLauncher из-за несовместимости. Мы перенесли всю эту функциональность в Dalamud.
+    => Вы можете управлять плагинами с главного экрана, нажав правой кнопкой мыши на кнопку входа и выбрав "Запустить без плагинов".
