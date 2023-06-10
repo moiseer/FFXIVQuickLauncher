@@ -77,7 +77,7 @@ namespace XIVLauncher
             public bool SquirrelFirstRun { get; set; }
         }
 
-        public const string BUILD_ORIGIN = "moiseer/FFXIVQuickLauncherRu";
+        public const string BUILD_ORIGIN = "moiseer/FFXIVQuickLauncher";
         public const string REPO_URL = $"https://github.com/{BUILD_ORIGIN}";
 
         public static ILauncherSettingsV3 Settings;

@@ -1,10 +1,10 @@
-# XIVLauncherRu [![Actions Status](https://img.shields.io/github/actions/workflow/status/moiseer/FFXIVQuickLauncherRu/ci-workflow.yml?branch=master)](https://github.com/moiseer/FFXIVQuickLauncherRu/actions) [![GitHub release (latest by date)](https://img.shields.io/github/v/release/moiseer/FFXIVQuickLauncherRu)](https://github.com/moiseer/FFXIVQuickLauncherRu/releases/latest) <a href="https://github.com/moiseer/FFXIVQuickLauncherRu/releases"><img src="https://github.com/moiseer/FFXIVQuickLauncherRu/raw/master/src/XIVLauncher/Resources/logo.png" alt="XL logo" width="100" align="right"/></a> 
+# XIVLauncherRu [![Actions Status](https://img.shields.io/github/actions/workflow/status/moiseer/FFXIVQuickLauncher/ci-workflow.yml?branch=master)](https://github.com/moiseer/FFXIVQuickLauncher/actions) [![GitHub release (latest by date)](https://img.shields.io/github/v/release/moiseer/FFXIVQuickLauncher)](https://github.com/moiseer/FFXIVQuickLauncher/releases/latest) <a href="https://github.com/moiseer/FFXIVQuickLauncher/releases"><img src="https://github.com/moiseer/FFXIVQuickLauncher/raw/master/src/XIVLauncher/Resources/logo.png" alt="XL logo" width="100" align="right"/></a> 
 
 XIVLauncher (сокращенно XL) - это более быстрый лаунчер на русском для FINAL FANTASY XIV, с различными доступными аддонами и улучшениями для игры!
 
 <p align="center">
-  <a href="https://github.com/moiseer/FFXIVQuickLauncherRu/releases">
-    <img src="https://raw.githubusercontent.com/moiseer/FFXIVQuickLauncherRu/master/misc/screenshot.png" alt="drawing" width="500"/>
+  <a href="https://github.com/moiseer/FFXIVQuickLauncher/releases">
+    <img src="https://raw.githubusercontent.com/moiseer/FFXIVQuickLauncher/master/misc/screenshot.png" alt="drawing" width="500"/>
   </a>
 </p>
 
@@ -18,7 +18,7 @@ XIVLauncher (сокращенно XL) - это более быстрый лау�
 
 ## Установка лаунчера <!-- TODO: Перевод Antivirus FAQ -->
 
-[Скачайте последнюю версию "Setup.exe" со страницы релизов](https://github.com/moiseer/FFXIVQuickLauncherRu/releases/latest) и запустите ее. XIVLauncher запустится и будет установлен в ваше стартовое меню.  
+[Скачайте последнюю версию "Setup.exe" со страницы релизов](https://github.com/moiseer/FFXIVQuickLauncher/releases/latest) и запустите ее. XIVLauncher запустится и будет установлен в ваше стартовое меню.  
 Для удаления вы можете воспользоваться меню Windows Programs & Apps или щелкнуть XIVLauncher правой кнопкой мыши в вашем стартовом меню.
 
 ❗<b>Внимание!</b> Если вы получаете ошибки во время установки или если программа запуска работает некорректно, обязательно <b>проверьте свой антивирус</b> и отключите его для XIVLauncher. Многие коммерческие антивирусные программы определяют XIVLauncher как ложное срабатывание. Вы можете проверить это сами на VirusTotal. Если вам нужна помощь, пожалуйста, [ознакомьтесь с FAQ](https://goatcorp.github.io/faq/xl_troubleshooting#q-how-do-i-whitelist-xivlauncher-and-dalamud-so-my-antivirus-leaves-them-alone).
