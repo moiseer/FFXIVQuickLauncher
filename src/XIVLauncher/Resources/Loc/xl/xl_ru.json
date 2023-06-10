@@ -7,9 +7,13 @@
     "message": "_Игнорировать",
     "description": "AppUtil.TryYellOnGameFilesBeingOpen"
   },
+  "UninstallQuestion": {
+    "message": "Sorry to see you go!\nDo you want to delete all of your saved settings, plugins and passwords?",
+    "description": "<>c__DisplayClass20_1.<Run>b__2"
+  },
   "updatefailureerror": {
     "message": "XIVLauncher не удалось проверить наличие обновлений. Это может быть вызвано проблемами с подключением к Интернету. Подождите несколько минут и повторите попытку.\nОтключите VPN, если он у вас есть. Возможно, вам также придется добавить XIVLauncher в исключения вашего антивируса.\nЕсли через несколько минут попытка не удалась, обратитесь к разделу FAQ.",
-    "description": "<Run>d__19.MoveNext"
+    "description": "<Run>d__20.MoveNext"
   },
   "RunOfficialLauncherNotPresentError": {
     "message": "Игра не установлена по указанному пути. XIVLauncher не может запустить официальный лаунчер.",
@@ -89,11 +93,11 @@
   },
   "NewsDlFailed": {
     "message": "Не удалось загрузить новости.",
-    "description": "MainWindow.<SetupHeadlines>b__12_3"
+    "description": "MainWindow.<SetupHeadlines>b__13_3"
   },
   "MaintenanceQueueBootPatch": {
     "message": "Обнаружен патч для официального лаунчера.\nОбычно это означает, что существует патч и для игры.\n\nСкоро вы будете авторизованы.",
-    "description": "<OnMaintenanceQueueTimerEvent>d__21.MoveNext"
+    "description": "<OnMaintenanceQueueTimerEvent>d__22.MoveNext"
   },
   "SettingsGamePatchPathError": {
     "message": "Пути для скачивания игры и патча не могут быть одинаковыми.\nПожалуйста, выберите разные пути скачивания игры и патча.",
@@ -114,14 +118,6 @@
   "DalamudCompatCheckFailed": {
     "message": "Не удалось связаться с сервером, чтобы получить текущую совместимую версию игры для Dalamud. Это может означать, что ваша версия лаунчера устарела.\nПожалуйста, проверьте Discord для получения дополнительной информации.",
     "description": "SettingsControl.EnableHooksCheckBox_OnChecked"
-  },
-  "PluginPathNotFound": {
-    "message": "Не удалось найти путь к каталогу плагина.",
-    "description": "SettingsControl.TogglePlugin_OnClick"
-  },
-  "GameIsOpenPluginLocked": {
-    "message": "Игра запущена, пожалуйста, закройте ее и повторите попытку.",
-    "description": "SettingsControl.DeletePlugin_OnClick"
   },
   "SteamFtToggleAutoStartWarning": {
     "message": "Необходимо перезапустить XIVLauncher, чтобы применить настройки.\nПожалуйста, перезапустите XIVLauncher.",
@@ -415,6 +411,10 @@
     "message": "Запустить без Dalamud",
     "description": "MainWindowViewModel.SetupLoc"
   },
+  "LoginBoxNoPluginLogin": {
+    "message": "Start w/o any Plugins",
+    "description": "MainWindowViewModel.SetupLoc"
+  },
   "LoginBoxNoThirdLogin": {
     "message": "Запустить без сторонних плагинов",
     "description": "MainWindowViewModel.SetupLoc"
@@ -532,11 +532,11 @@
     "description": "<RepairGame>d__25.MoveNext"
   },
   "GameRepairSuccessMoved1": {
-    "message": "Кроме того, 1 файл, который не поставлялся с оригинальной установкой игры, был перемещен в {0}.\nЕсли вы использовали GShade, вам придется переустановить его.",
+    "message": "Кроме того, 1 файл, который не поставлялся с оригинальной установкой игры, был перемещен в {0}.\nЕсли вы использовали ReShade, вам придется переустановить его.",
     "description": "<RepairGame>d__25.MoveNext"
   },
   "GameRepairSuccessMovedPlural": {
-    "message": "Кроме того, {0} файлов, которые не поставлялись с оригинальной установкой игры, были перемещены в {1}.\nЕсли вы использовали GShade, вам придется переустановить его.",
+    "message": "Кроме того, {0} файлов, которые не поставлялись с оригинальной установкой игры, были перемещены в {1}.\nЕсли вы использовали ReShade, вам придется переустановить его.",
     "description": "<RepairGame>d__25.MoveNext"
   },
   "GameRepairSuccess_LaunchGame": {
@@ -573,10 +573,6 @@
   },
   "DalamudArchError": {
     "message": "Dalamud не может быть запущен на этой архитектуре процессора. Пожалуйста, убедитесь, что вы используете 64-битную версию Windows.\nЕсли вы используете Windows на ARM, убедитесь, что x64 эмуляция включена для XIVLauncher.",
-    "description": "<StartGameAndAddon>d__29.MoveNext"
-  },
-  "DalamudRunnerError": {
-    "message": "Не удалось запустить Dalamud. Этому может препятствовать Ваш антивирус.\nЧтобы предотвратить эту проблему, добавьте в исключения антивируса папку \"%AppData%\\XIVLauncher\\addons\".",
     "description": "<StartGameAndAddon>d__29.MoveNext"
   },
   "DalamudEnsurementError": {
@@ -623,12 +619,16 @@
     "message": "Информация о версии не может быть считана из файлов игры.\n\nВам необходимо переустановить или восстановить файлы игры. Щелкните правой кнопкой мыши на кнопке входа в XIVLauncher и выберите \"Восстановить игру\".",
     "description": "<TryLoginToGame>d__23.MoveNext"
   },
+  "LoginSteamNullTicket": {
+    "message": "Steam did not authenticate you. This is likely a temporary issue with Steam and you may just have to try again in a few minutes.\n\nIf the issue persists, please make sure that Steam is running and that you are logged in with the account tied to your SE ID.\nIf you play using the Free Trial, please check the \"Using Free Trial account\" checkbox in the \"Game Settings\" tab of the XIVLauncher settings.",
+    "description": "<TryLoginToGame>d__23.MoveNext"
+  },
   "LoginSteamIssue": {
     "message": "Не удалось пройти аутентификацию в Steam. Убедитесь, что Steam запущен и что вы вошли в систему под учетной записью, привязанной к вашему SE ID.\nЕсли вы играете, используя бесплатную пробную версию, пожалуйста, установите флажок \"Использовать учетную запись бесплатной пробной версии\" на вкладке \"Настройки игры\" в настройках XIVLauncher.\n\nКонтекст: {0}",
     "description": "<TryLoginToGame>d__23.MoveNext"
   },
   "LoginSteamWrongAccount": {
-    "message": "Учетная запись, которую вы заходите, НЕ связана с учетной записью Steam на вашем ПК. Вы можете войти только с учетной записью, привязанной к SE ID при использовании этой учетной записи Steam.\n\nПожалуйста, войдите в соответствующий аккаунт.",
+    "message": "The account you are logging in to is not the one that is linked to the Steam account on your PC. You can only log in with the account tied to your SE ID while using this Steam account.\n\nPlease log into matching accounts. The account that is linked to Steam is \"{0}\" - make sure there are no typos.",
     "description": "<TryLoginToGame>d__23.MoveNext"
   },
   "LoginSteamLinkNeeded": {
@@ -749,6 +749,10 @@
   },
   "OtpInputPromptBad": {
     "message": "Введите валидный ключ OTP.\nОн состоит из 6 цифр.",
+    "description": "OtpInputDialogViewModel.SetupLoc"
+  },
+  "PasteButton": {
+    "message": "Click here to paste from the clipboard.",
     "description": "OtpInputDialogViewModel.SetupLoc"
   },
   "PatchPreparing": {

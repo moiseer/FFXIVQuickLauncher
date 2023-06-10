@@ -52,6 +52,7 @@ namespace XIVLauncher.Windows.ViewModel
         {
             Start,
             StartWithoutDalamud,
+            StartWithoutPlugins,
             StartWithoutThird,
             UpdateOnly,
             Repair,
@@ -66,6 +67,7 @@ namespace XIVLauncher.Windows.ViewModel
             StartLoginCommand = new SyncCommand(GetLoginFunc(AfterLoginAction.Start), () => !IsLoggingIn);
             LoginNoStartCommand = new SyncCommand(GetLoginFunc(AfterLoginAction.UpdateOnly), () => !IsLoggingIn);
             LoginNoDalamudCommand = new SyncCommand(GetLoginFunc(AfterLoginAction.StartWithoutDalamud), () => !IsLoggingIn);
+            LoginNoPluginsCommand = new SyncCommand(GetLoginFunc(AfterLoginAction.StartWithoutPlugins), () => !IsLoggingIn);
             LoginNoThirdCommand = new SyncCommand(GetLoginFunc(AfterLoginAction.StartWithoutThird), () => !IsLoggingIn);
             LoginRepairCommand = new SyncCommand(GetLoginFunc(AfterLoginAction.Repair), () => !IsLoggingIn);
 
@@ -429,10 +431,13 @@ namespace XIVLauncher.Windows.ViewModel
                     if (ex.InnerException != null)
                         msgbox.WithAppendDescription(ex.InnerException.ToString());
                 }
-                else if (ex is SteamWrongAccountException)
+                else if (ex is SteamWrongAccountException wrongAccountException)
                 {
-                    msgbox.WithText(Loc.Localize("LoginSteamWrongAccount",
-                        "The account you are logging in to is NOT the one that is linked to the Steam account on your PC. You can only log in with the account tied to your SE ID while using this Steam account.\n\nPlease log into matching accounts."));
+                    var locMsg = Loc.Localize("LoginSteamWrongAccount",
+                        "The account you are logging in to is not the one that is linked to the Steam account on your PC. You can only log in with the account tied to your SE ID while using this Steam account.\n\nPlease log into matching accounts. The account that is linked to Steam is \"{0}\" - make sure there are no typos.");
+                    locMsg = string.Format(locMsg, wrongAccountException.ImposedUserName);
+
+                    msgbox.WithText(locMsg);
                 }
                 else if (ex is SteamLinkNeededException)
                 {
@@ -626,7 +631,12 @@ namespace XIVLauncher.Windows.ViewModel
 
                 try
                 {
-                    using var process = await StartGameAndAddon(loginResult, isSteam, action == AfterLoginAction.StartWithoutDalamud, action == AfterLoginAction.StartWithoutThird).ConfigureAwait(false);
+                    using var process = await StartGameAndAddon(
+                        loginResult,
+                        isSteam,
+                        action == AfterLoginAction.StartWithoutDalamud,
+                        action == AfterLoginAction.StartWithoutThird,
+                        action == AfterLoginAction.StartWithoutPlugins).ConfigureAwait(false);
 
                     if (process == null)
                         return false;
@@ -1012,7 +1022,7 @@ namespace XIVLauncher.Windows.ViewModel
             Environment.Exit(0);
         }
 
-        public async Task<Process?> StartGameAndAddon(Launcher.LoginResult loginResult, bool isSteam, bool forceNoDalamud, bool noThird)
+        public async Task<Process?> StartGameAndAddon(Launcher.LoginResult loginResult, bool isSteam, bool forceNoDalamud, bool noThird, bool noPlugins)
         {
             var dalamudLauncher = new DalamudLauncher(new WindowsDalamudRunner(), App.DalamudUpdater, App.Settings.InGameAddonLoadMethod.GetValueOrDefault(DalamudLoadMethod.DllInject),
                 App.Settings.GamePath,
@@ -1020,7 +1030,7 @@ namespace XIVLauncher.Windows.ViewModel
                 App.Settings.Language.GetValueOrDefault(ClientLanguage.English),
                 (int)App.Settings.DalamudInjectionDelayMs,
                 false,
-                false,
+                noPlugins,
                 noThird,
                 Troubleshooting.GetTroubleshootingJson());
 
@@ -1350,6 +1360,8 @@ namespace XIVLauncher.Windows.ViewModel
 
         public ICommand LoginNoDalamudCommand { get; set; }
 
+        public ICommand LoginNoPluginsCommand { get; set; }
+
         public ICommand LoginNoThirdCommand { get; set; }
 
         public ICommand LoginRepairCommand { get; set; }
@@ -1472,6 +1484,7 @@ namespace XIVLauncher.Windows.ViewModel
             LoginNoStartLoc = Loc.Localize("LoginBoxNoStartLogin", "Update without starting");
             LoginRepairLoc = Loc.Localize("LoginBoxRepairLogin", "Repair game files");
             LoginNoDalamudLoc = Loc.Localize("LoginBoxNoDalamudLogin", "Start w/o Dalamud");
+            LoginNoPluginsLoc = Loc.Localize("LoginBoxNoPluginLogin", "Start w/o any Plugins");
             LoginNoThirdLoc = Loc.Localize("LoginBoxNoThirdLogin", "Start w/o Third-Party Plugins");
             LoginTooltipLoc = Loc.Localize("LoginBoxLoginTooltip", "Log in with the provided credentials");
             WaitingForMaintenanceLoc = Loc.Localize("LoginBoxWaitingForMaint", "Waiting for maintenance to be over...");
@@ -1491,6 +1504,7 @@ namespace XIVLauncher.Windows.ViewModel
         public string LoginLoc { get; private set; }
         public string LoginNoStartLoc { get; private set; }
         public string LoginNoDalamudLoc { get; private set; }
+        public string LoginNoPluginsLoc { get; private set; }
         public string LoginNoThirdLoc { get; private set; }
         public string LoginRepairLoc { get; private set; }
         public string WaitingForMaintenanceLoc { get; private set; }
