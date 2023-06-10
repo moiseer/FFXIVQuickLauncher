@@ -1048,7 +1048,7 @@
     "description": "SettingsControlViewModel.SetupLoc"
   },
   "Credits": {
-    "message": "Создано goat. Особая благодарность Mino, sky, LeonBlade, Wintermute, Zyian,\nRoy, Meli, Aida Enna, Aireil и the angry paissa artist!\n\nЕсть вопросы или предложения? Присоединяйтесь к Discord или создайте запрос на GitHub!",
+    "message": "Создано goat. Особая благодарность Mino, sky, LeonBlade, Wintermute, Zyian,\nRoy, Meli, Aida Enna, Aireil и the angry paissa artist!\n\nПравки русской версии: Moiseer.\n\nЕсть вопросы или предложения? Присоединяйтесь к Discord или создайте запрос на GitHub!",
     "description": "SettingsControlViewModel.SetupLoc"
   },
   "License": {
