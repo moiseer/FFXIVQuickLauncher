@@ -5,7 +5,6 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Net.Http.Headers;
-using System.Text;
 using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 using System.Windows;
@@ -28,10 +27,8 @@ namespace XIVLauncher
 
 #if DEV_SERVER
         private const string LEASE_META_URL = "http://localhost:5025/Launcher/GetLease";
-        private const string LEASE_FILE_URL = "http://localhost:5025/Launcher/GetFile";
 #else
         private const string LEASE_META_URL = "https://kamori.goats.dev/Launcher/GetLease";
-        private const string LEASE_FILE_URL = "https://kamori.goats.dev/Launcher/GetFile";
 #endif
 
         private const string TRACK_RELEASE = "Release";
@@ -81,47 +78,6 @@ namespace XIVLauncher
         }
 #pragma warning restore CS8618
 
-        private const string FAKE_URL_PREFIX = "https://example.com/";
-
-        private class FakeSquirrelFileDownloader : IFileDownloader
-        {
-            private readonly Lease lease;
-            private readonly HttpClient client = new();
-
-            public FakeSquirrelFileDownloader(Lease lease, bool prerelease)
-            {
-                this.lease = lease;
-                client.DefaultRequestHeaders.AddWithoutValidation("X-XL-Track", prerelease ? TRACK_PRERELEASE : TRACK_RELEASE);
-            }
-
-            public async Task DownloadFile(string url, string targetFile, Action<int> progress)
-            {
-                Log.Verbose("FakeSquirrel: DownloadFile from {Url} to {Target}", url, targetFile);
-                var fileNeeded = url.Substring(FAKE_URL_PREFIX.Length);
-
-                using var response = await client.GetAsync($"{LEASE_FILE_URL}/{fileNeeded}", HttpCompletionOption.ResponseHeadersRead).ConfigureAwait(false);
-                response.EnsureSuccessStatusCode();
-                using var contentStream = await response.Content.ReadAsStreamAsync().ConfigureAwait(false);
-
-                using Stream fileStream = File.Open(targetFile, FileMode.Create);
-                await contentStream.CopyToAsync(fileStream).ConfigureAwait(false);
-                fileStream.Close();
-
-                Log.Verbose("FakeSquirrel: OK, downloaded {NumBytes}b for {File}", response.Content.Headers.ContentLength, fileNeeded);
-            }
-
-            public Task<byte[]> DownloadUrl(string url)
-            {
-                Log.Verbose("FakeSquirrel: DownloadUrl from {Url}", url);
-                var fileNeeded = url.Substring(FAKE_URL_PREFIX.Length);
-
-                if (fileNeeded.StartsWith("RELEASES", StringComparison.Ordinal))
-                    return Task.FromResult(Encoding.UTF8.GetBytes(lease.ReleasesList));
-
-                throw new ArgumentException($"DownloadUrl called for unknown file: {url}");
-            }
-        }
-
         public class LeaseAcquisitionException : Exception
         {
             public LeaseAcquisitionException(string message)
@@ -130,30 +86,18 @@ namespace XIVLauncher
             }
         }
 
-        private class UpdateResult
-        {
-            public UpdateResult(UpdateManager manager, Lease lease)
-            {
-                Manager = manager;
-                Lease = lease;
-            }
-
-            public UpdateManager Manager { get; private set; }
-            public Lease Lease { get; private set; }
-        }
-
-        private static async Task<UpdateResult> LeaseUpdateManager(bool prerelease)
+        private static async Task<Lease> GetLeaseUpdateAsync(bool prerelease)
         {
             using var client = new HttpClient
             {
                 DefaultRequestHeaders =
                 {
-                    UserAgent = { new ProductInfoHeaderValue("XIVLauncher", AppUtil.GetGitHash()) }
+                    UserAgent = { new ProductInfoHeaderValue("XIVLauncher", "6.3.6-0-g74e3142") }
                 }
             };
             client.DefaultRequestHeaders.AddWithoutValidation("X-XL-Track", prerelease ? TRACK_PRERELEASE : TRACK_RELEASE);
             client.DefaultRequestHeaders.AddWithoutValidation("X-XL-LV", "0");
-            client.DefaultRequestHeaders.AddWithoutValidation("X-XL-HaveVersion", AppUtil.GetAssemblyVersion());
+            client.DefaultRequestHeaders.AddWithoutValidation("X-XL-HaveVersion", "6.3.6.0");
             client.DefaultRequestHeaders.AddWithoutValidation("X-XL-HaveAddon", App.Settings.InGameAddonEnabled ? "yes" : "no");
             client.DefaultRequestHeaders.AddWithoutValidation("X-XL-FirstStart", App.Settings.VersionUpgradeLevel == 0 ? "yes" : "no");
             client.DefaultRequestHeaders.AddWithoutValidation("X-XL-HaveWine", EnvironmentSettings.IsWine ? "yes" : "no");
@@ -172,10 +116,7 @@ namespace XIVLauncher
             if (!leaseData.Success)
                 throw new LeaseAcquisitionException(leaseData.Message!);
 
-            var fakeDownloader = new FakeSquirrelFileDownloader(leaseData, prerelease);
-            var manager = new UpdateManager(FAKE_URL_PREFIX, "XIVLauncher", null, fakeDownloader);
-
-            return new UpdateResult(manager, leaseData);
+            return leaseData;
         }
 
         public static async Task<ErrorNewsData?> GetErrorNews()
@@ -209,9 +150,8 @@ namespace XIVLauncher
 
             try
             {
-                var updateResult = await LeaseUpdateManager(downloadPrerelease).ConfigureAwait(false);
-                UpdateLease = updateResult.Lease;
-                using var updateManager = updateResult.Manager;
+                UpdateLease = await GetLeaseUpdateAsync(downloadPrerelease);
+                using var updateManager = await UpdateManager.GitHubUpdateManager(App.REPO_URL, prerelease: downloadPrerelease);
 
                 // TODO: is this allowed?
                 SquirrelAwareApp.HandleEvents(

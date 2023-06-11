@@ -39,13 +39,11 @@
   </PropertyGroup>
   <PropertyGroup Label="Nuget">
     <IsPackable>false</IsPackable>
-    <Authors>XIVLauncher Contributors</Authors>
+    <Authors>moiseer</Authors>
     <PackageLicenseExpression>GPLv3</PackageLicenseExpression>
-    <PackageProjectUrl>https://github.com/goatcorp/FFXIVQuickLauncher</PackageProjectUrl>
-    <RepositoryUrl>https://github.com/goatcorp/FFXIVQuickLauncher</RepositoryUrl>
+    <PackageProjectUrl>https://github.com/moiseer/FFXIVQuickLauncher</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/moiseer/FFXIVQuickLauncher</RepositoryUrl>
     <PackageReleaseNotes>Automated release</PackageReleaseNotes>
-    <Company>goatsoft</Company>
-    <Copyright>Copyright (c) goatsoft</Copyright>
     <PackageTags>mmo</PackageTags>
   </PropertyGroup>
 </Project>
