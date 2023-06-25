@@ -727,6 +727,10 @@
     "message": "Это может быть временной проблемой. Пожалуйста, попробуйте перезагрузить ваш компьютер.\nВозможно, ваша установка игры недействительна - вы можете восстановить установку игры, щелкнув правой кнопкой мыши на кнопке входа в систему и выбрав \"Восстановить игру\".",
     "description": "<TryProcessLoginResult>d__24.MoveNext"
   },
+  "GameExitedPrematurelyErrorAV": {
+    "message": "\nThis issue could also be caused by your Antivirus program mistakenly marking XIVLauncher as malicious. You may have to add exclusions to its settings - please check our FAQ for more information.",
+    "description": "<TryProcessLoginResult>d__24.MoveNext"
+  },
   "BinaryNotPresentErrorSummary": {
     "message": "Не удалось найти исполняемый файл игры.",
     "description": "<TryProcessLoginResult>d__24.MoveNext"
